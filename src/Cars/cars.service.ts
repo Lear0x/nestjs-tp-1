@@ -1,10 +1,20 @@
 import { Injectable } from '@nestjs/common';
+import { Car } from './cars.model';
 
 
 
 @Injectable()
 export class CarService {
-	getCars(): string[] {
-		return ['Car 1', 'Car 2', 'Car 3'];
+
+	private readonly cars: Car[] = [];
+
+	getCars(): Car[] {
+		return this.cars;
+	}
+
+	addCar(brand: string, color: string): Car {
+		const newCar = new Car(brand, color);
+		this.cars.push(newCar);
+		return newCar;
 	}
 }
